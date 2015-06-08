@@ -15,7 +15,7 @@ with some enhancements:
 
 two sample images of what it can do (rendered from the test/ folder):
 
-![splash screen](https://raw.githubusercontent.com/gooofy/robinson/master/splash.png)
-
 ![weather](https://raw.githubusercontent.com/gooofy/robinson/master/weather.png)
+
+![splash screen](https://raw.githubusercontent.com/gooofy/robinson/master/splash.png)
 

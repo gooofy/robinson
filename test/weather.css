@@ -1,0 +1,124 @@
+/*
+ * HAL background colors:
+ *
+ * 378d66
+ * 113351
+ * 8c316b
+ * 1271b1
+ * 178fdf
+ * 6c3d88
+ * c31c3d
+ * 007388
+ */
+
+* {
+    display: block;
+}
+
+span {
+    display: inline;
+}
+
+img {
+    display: img;
+}
+
+table {
+    display: table;
+}
+
+tbody {
+    border-color: #c31c3d;
+    border-width: 0px;
+}
+
+tr {
+    display: tr;
+}
+
+td {
+    display            : td;
+    border-width       : 0px;
+    border-right-width : 0px;
+    border-bottom-width: 0px;
+    padding            : 0px;
+    padding-top        : 20px;
+    padding-bottom     : 20px;
+    border-color       : white;
+    text-align         : center;
+}
+
+td.lastcol {
+    border-right-width : 0px;
+}
+
+td.lastrow {
+    border-bottom-width : 0px;
+}
+
+td.corner {
+    border-right-width : 0px;
+    border-bottom-width : 0px;
+}
+
+th {
+    display: td;
+    color: white;
+    background : black;
+    padding: 2px;
+}
+
+html {
+  width       : 880px;
+  padding-top : 20px;
+  padding     : 40px;
+  border-width: 0px;
+  border-color: red;
+  margin      : auto;
+  background  : #810028;
+
+  font-family : "MicrogrammaDMedExt";
+  font-size   : 42px;
+  color       : lightgray;
+}
+
+head {
+  display: none;
+}
+
+.small {
+  font-size   : 18px;
+}
+
+.heading {
+  margin-top    : 10px;
+  margin-bottom : 5px;
+  font-size     : 28px;
+  font-family   : "MicrogrammaDBolExt";
+}
+
+.current {
+  font-size     : 72px;
+}
+
+td.heading {
+  border-top-width    : 0px;
+  border-left-width   : 0px;
+  border-bottom-width : 0px;
+  border-right-width  : 0px;
+  padding-bottom      : 5px;
+}
+
+td.current {
+  padding-top         : 5px;
+  padding-bottom      : 30px;
+  border-top-width    : 0px;
+  border-left-width   : 0px;
+  border-bottom-width : 0px;
+  border-right-width  : 0px;
+}
+
+.date {
+  font-size   : 18px;
+  text-align  : right;
+}

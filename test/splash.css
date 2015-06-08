@@ -1,0 +1,71 @@
+* {
+    display: block;
+}
+
+span {
+    display: inline;
+}
+
+img {
+    display: img;
+}
+
+table {
+    display: table;
+}
+
+tbody {
+    border-color: #c31c3d;
+    border-width: 0px;
+}
+
+tr {
+    display: tr;
+}
+
+td {
+    display            : td;
+    border-width       : 0px;
+    padding            : 0px;
+    border-color       : white;
+    text-align         : left;
+}
+
+th {
+    display: td;
+    color: white;
+    background : black;
+}
+
+html {
+  width       : 880px;
+  padding-top : 20px;
+  padding     : 40px;
+  border-width: 0px;
+  border-color: red;
+  margin      : auto;
+  background  : #042e28;
+
+  font-family : "Liberation Mono";
+  font-size   : 26px;
+  color       : white;
+}
+
+head {
+  display: none;
+}
+
+.date {
+    margin-top  : 150px;
+    margin-bottom : -15px;
+
+    font-size   : 32px;
+    font-family : "MicrogrammaDMedExt";
+}
+
+.huge {
+    font-size   : 160px;
+    text-align : center;
+    font-family : "MicrogrammaDBolExt";
+}
+
