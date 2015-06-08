@@ -35,21 +35,17 @@ def load_resourcefn (fn):
         res = f.read()
     return res
 
-def text_extents(font_face, font_size, text):
-    global ctx
+def text_extents(ctx, font_face, font_size, text):
     ctx.select_font_face (font_face)
     ctx.set_font_size (font_size)
     return ctx.text_extents (text)
 
-def font_extents(font_face, font_size):
-    global ctx
+def font_extents(ctx, font_face, font_size):
     ctx.select_font_face (font_face)
     ctx.set_font_size (font_size)
     return ctx.font_extents ()
 
 def render_image (htmlfn, cssfn, pngfn) :
-
-    global ctx
 
     with open(htmlfn) as f:
         html = f.read()
@@ -61,7 +57,7 @@ def render_image (htmlfn, cssfn, pngfn) :
     surface = cairo.ImageSurface (cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
     ctx = cairo.Context (surface)
 
-    rob = robinson.html (html, css, WIDTH, load_resourcefn, text_extents, font_extents)
+    rob = robinson.html (html, css, WIDTH, load_resourcefn, text_extents, font_extents, ctx)
 
     rob.render(ctx)
 

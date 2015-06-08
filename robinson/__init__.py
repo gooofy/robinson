@@ -185,11 +185,12 @@ class html(object):
 
         self.ltree.render(ctx)
 
-    def __init__(self, html, css, width, load_resourcefn, text_extents, font_extents):
+    def __init__(self, html, css, width, load_resourcefn, text_extents, font_extents, user_data):
 
         self.text_extents    = text_extents
         self.font_extents    = font_extents
         self.load_resourcefn = load_resourcefn
+        self.user_data       = user_data
 
         if VERBOSE:
             start = time.clock()

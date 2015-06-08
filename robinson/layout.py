@@ -423,9 +423,9 @@ class LayoutBox(object):
         font_family = self.get_style("font-family", None, "Monospace", inherit=True)
         font_size   = self.get_style("font-size", None, 16, inherit=True)
         if self.text is not None:
-            xtents = self.html.text_extents(font_family.to_str(), font_size.to_px(), self.text)
+            xtents = self.html.text_extents(self.html.user_data, font_family.to_str(), font_size.to_px(), self.text)
             width  = xtents[4]
-            xtents = self.html.font_extents(font_family.to_str(), font_size.to_px())
+            xtents = self.html.font_extents(self.html.user_data, font_family.to_str(), font_size.to_px())
             height = xtents[2]
         else:
             width  = 0
