@@ -13,5 +13,9 @@ with some enhancements:
 - some support for inline and table layout
 - support for text and fonts including word wrapping and alignment
 
+two sample images of what it can do (rendered from the test/ folder):
+
 ![splash screen](https://raw.githubusercontent.com/gooofy/robinson/master/splash.png)
+
+![weather](https://raw.githubusercontent.com/gooofy/robinson/master/weather.png)
 
