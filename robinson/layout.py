@@ -761,7 +761,8 @@ class LayoutBox(object):
         ctx.set_source_rgba   (color[0], color[1], color[2], 1.0)
         ctx.select_font_face  (font_family)
         ctx.set_font_size     (font_size)
-        xt = ctx.font_extents ()
+        xt = self.html.font_extents(self.html.user_data, font_family, font_size)
+        #xt = ctx.font_extents ()
         ctx.move_to           (self.dimensions.content.x, self.dimensions.content.y + xt[0])
         ctx.show_text         (self.text)
 
