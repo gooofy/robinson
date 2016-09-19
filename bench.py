@@ -32,7 +32,7 @@ from time import time
 
 import robinson
 
-ITERATIONS = 1000
+ITERATIONS = 10
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -83,6 +83,8 @@ def font_extents(ctx, font_face, font_size):
 
 def run_benchmark (htmlfn, cssfn, pngfn) :
 
+    print "starting benchmark, %d iterations..." % ITERATIONS
+
     with open(htmlfn) as f:
         html = f.read()
     with open(cssfn) as f:
@@ -91,8 +93,6 @@ def run_benchmark (htmlfn, cssfn, pngfn) :
     WIDTH, HEIGHT = 1024, 576
 
     ctx = DummyContext()
-
-    print repr(ctx)
 
     for i in range(ITERATIONS):
         rob = robinson.html (html, css, WIDTH, load_resourcefn, text_extents, font_extents, ctx)
