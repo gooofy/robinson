@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Copyright 2015 Guenter Bartsch
+# Copyright 2015, 2016 Guenter Bartsch
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -22,7 +22,7 @@
 # tiny html+css renderer, based on mbrubeck's rendering engine 
 # with some enhancements:
 #
-# - uses html5lib + tinycss for parsing
+# - uses lxml + tinycss for parsing
 # - uses cssselect for css selector handling
 # - some support for inline and table layout
 # - support for text and fonts including word wrapping and alignment
@@ -31,7 +31,7 @@
 import re, os
 from StringIO import StringIO
 
-import html5lib
+from lxml import etree
 import tinycss
 import cssselect
 import cairo
@@ -195,15 +195,20 @@ class html(object):
         if VERBOSE:
             start = time.clock()
             end   = time.clock()
-            print "robinson: %8.3fs html5lib.parse..." % (end-start)
+            print "robinson: %8.3fs lxml parsing..." % (end-start)
 
             pr = cProfile.Profile()
 
-
-        document = html5lib.parse(html, treebuilder='lxml', namespaceHTMLElements=False)
+        root = etree.fromstring(html)
+        document = etree.ElementTree(root)
 
         if VERBOSE:
             end   = time.clock()
+
+            print repr(root), root.__class__
+            print document, repr(document), document.__class__
+            print etree.tostring(document.getroot())
+
             print "robinson: %8.3fs tinycss.css21.CSS21Parser()..." % (end-start)
 
         cssparser = tinycss.css21.CSS21Parser()
@@ -265,12 +270,12 @@ class html(object):
             end   = time.clock()
             print "robinson: %8.3fs __init__ done." % (end-start)
 
-            pr.disable()
-            s = StringIO()
-            sortby = 'cumulative'
-            ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-            ps.print_stats()
-            print s.getvalue()
+            # pr.disable()
+            # s = StringIO()
+            # sortby = 'cumulative'
+            # ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+            # ps.print_stats()
+            # print s.getvalue()
 
         #pprint_ltree (self.ltree, 0)
 

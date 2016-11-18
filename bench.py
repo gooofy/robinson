@@ -118,6 +118,6 @@ end_time = time()
 
 logging.debug("robinson delay=%f" % (end_time - start_time))
 
-s = pstats.Stats("Profile.prof")
-s.strip_dirs().sort_stats("time").print_stats()
+# s = pstats.Stats("Profile.prof")
+# s.strip_dirs().sort_stats("time").print_stats()
 
