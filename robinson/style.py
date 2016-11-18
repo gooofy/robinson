@@ -22,7 +22,7 @@
 # tiny html+css renderer, based on mbrubeck's rendering engine 
 # with some enhancements:
 #
-# - uses html5lib + tinycss for parsing
+# - uses lxml + tinycss for parsing
 # - uses cssselect for css selector handling
 # - some support for inline and table layout
 # - support for text and fonts including word wrapping and alignment
