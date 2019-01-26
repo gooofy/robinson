@@ -321,6 +321,8 @@ class LayoutBox(object):
         # laying out its children.
         self.calculate_block_width(lc)
 
+        # import pdb; pdb.set_trace()
+
         tlc.table_colf = self.dimensions.content.width / tlc.table_colw_sum
 
         # Determine where the box is located within its container.
@@ -431,14 +433,13 @@ class LayoutBox(object):
             width  = 0
             height = 0
 
+        width = self.get_style("width", "width", Value('DIMENSION', width, 'px')).to_px()
+
         # make room for children, if any
 
         for child in self.children:
             if child.box_type == 'img':
                 child.calculate_image_width_height()
-
-                #print "MAKING ROOM FOR IMAGE CHILD width=%f" % child.dimensions.content.width
-
             else:
                 child.calculate_inline_width_height()
 
