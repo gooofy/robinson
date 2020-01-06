@@ -97,9 +97,15 @@ def run_benchmark (htmlfn, cssfn, pngfn) :
 # init
 #
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+try:
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+
+except:
+    pass
+
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'wb', 0)
+
 
 #
 # main

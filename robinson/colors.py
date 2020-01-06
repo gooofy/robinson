@@ -167,6 +167,10 @@ css_colors = {
 }
 
 # CSS color names are case-insensitive
-css_colors_low = {k.lower(): v for k,v in css_colors.iteritems()}
+try:
+    css_colors_low = {k.lower(): v for k,v in css_colors.iteritems()}
+except:
+    css_colors_low = {k.lower(): v for k,v in css_colors.items()}
+
 
 

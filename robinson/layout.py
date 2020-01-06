@@ -20,8 +20,17 @@
 
 import re, os
 
-from colors import css_colors_low
-from style import Value, zero
+from functools import reduce
+
+try:
+    from colors import css_colors_low
+except:
+    from .colors import css_colors_low
+
+try:
+    from style import Value, zero
+except:
+    from .style import Value, zero
 
 class Rect(object):
 
@@ -559,7 +568,8 @@ class LayoutBox(object):
 
         padding_left = self.get_style("padding-left", "padding", zero)
         padding_right = self.get_style("padding-right", "padding", zero)
- 
+
+
         total = reduce(lambda x, y: x+y, 
                            map(lambda x: 0.0 if x.is_auto() else x.to_px(), 
                                [margin_left, margin_right, border_left, border_right,
