@@ -27,9 +27,13 @@
 # - some support for inline and table layout
 # - support for text and fonts including word wrapping and alignment
 #
+from __future__ import print_function
 
 import re, os
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except:
+    from io import StringIO
 
 from lxml import etree
 import tinycss
@@ -38,9 +42,20 @@ import cairo
 import traceback
 import time
 import cProfile, pstats
+import sys
 
-from style import Value, get_style_string
-from layout import Dimensions, LayoutBox, LayoutContext
+PYVER = sys.version_info.major
+
+try:
+    from style import Value, get_style_string
+except:
+    from .style import Value, get_style_string
+
+try:
+    from layout import Dimensions, LayoutBox, LayoutContext
+except:
+    from .layout import Dimensions, LayoutBox, LayoutContext
+
 
 VERBOSE = False
 
@@ -52,11 +67,11 @@ img_cache       = {}
 
 def pprint_ltree (box, indent):
 
-    print "LTREE: ",
+    print("LTREE: ",end="")
     for i in range(indent):
-        print ' ',
+        print(' ', end="")
 
-    print box.box_type, box.node.tag if box.node is not None else 'NONE', repr(box.text), box.dimensions.content, id(box)
+    print(box.box_type, box.node.tag if box.node is not None else 'NONE', repr(box.text), box.dimensions.content, id(box))
 
     for child in box.children:
         pprint_ltree (child, indent+1)
@@ -156,16 +171,21 @@ class html(object):
         global img_cache
 
         if VERBOSE:
-            print "robinson: load_image(%s)..." % imagefn
+            print("robinson: load_image(%s)..." % imagefn)
 
         if not imagefn in img_cache:
 
             if VERBOSE:
-                print "robinson: load_image CACHE MISS" 
+                print("robinson: load_image CACHE MISS")
 
             pngstr = self.load_resourcefn (imagefn)
 
-            sio = StringIO (pngstr)
+            if PYVER == 2:
+                sio = StringIO(str(pngstr))
+            else:
+                from io import BytesIO
+                sio = BytesIO(pngstr)
+
             try:
                 img_cache[imagefn] = cairo.ImageSurface.create_from_png(sio)
             except:
@@ -195,7 +215,7 @@ class html(object):
         if VERBOSE:
             start = time.clock()
             end   = time.clock()
-            print "robinson: %8.3fs lxml parsing..." % (end-start)
+            print("robinson: %8.3fs lxml parsing..." % (end-start))
 
             pr = cProfile.Profile()
 
@@ -205,11 +225,11 @@ class html(object):
         if VERBOSE:
             end   = time.clock()
 
-            print repr(root), root.__class__
-            print document, repr(document), document.__class__
-            print etree.tostring(document.getroot())
+            print(repr(root), root.__class__)
+            print(document, repr(document), document.__class__)
+            print(etree.tostring(document.getroot()))
 
-            print "robinson: %8.3fs tinycss.css21.CSS21Parser()..." % (end-start)
+            print("robinson: %8.3fs tinycss.css21.CSS21Parser()..." % (end-start))
 
         cssparser = tinycss.css21.CSS21Parser()
 
@@ -217,7 +237,7 @@ class html(object):
         
         if VERBOSE:
             end   = time.clock()
-            print "robinson: %8.3fs style mapping..." % (end-start)
+            print("robinson: %8.3fs style mapping..." % (end-start))
 
         style_map = {}
 
@@ -259,7 +279,7 @@ class html(object):
 
         if VERBOSE:
             end   = time.clock()
-            print "robinson: %8.3fs building layout tree..." % (end-start)
+            print("robinson: %8.3fs building layout tree..." % (end-start))
             pr.enable()
 
         viewport = Dimensions ()
@@ -268,7 +288,7 @@ class html(object):
 
         if VERBOSE:
             end   = time.clock()
-            print "robinson: %8.3fs __init__ done." % (end-start)
+            print("robinson: %8.3fs __init__ done." % (end-start))
 
             # pr.disable()
             # s = StringIO()

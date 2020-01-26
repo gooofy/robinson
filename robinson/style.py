@@ -30,7 +30,11 @@
 
 import re, os
 
-from colors import css_colors_low
+try:
+    from colors import css_colors_low
+except:
+    from .colors import css_colors_low
+
 
 def hash_to_rgb (h):
 

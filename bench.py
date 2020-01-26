@@ -21,6 +21,7 @@
 #
 # simple benchmark app for robinson tuning
 #
+from __future__ import print_function
 
 import sys
 import numpy as np
@@ -83,7 +84,7 @@ def font_extents(ctx, font_face, font_size):
 
 def run_benchmark (htmlfn, cssfn, pngfn) :
 
-    print "starting benchmark, %d iterations..." % ITERATIONS
+    print("starting benchmark, %d iterations..." % ITERATIONS)
 
     with open(htmlfn) as f:
         html = f.read()
@@ -102,9 +103,13 @@ def run_benchmark (htmlfn, cssfn, pngfn) :
 # init
 #
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+try:
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+except:
+    pass
+
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'wb', 0)
 
 #
 # main
