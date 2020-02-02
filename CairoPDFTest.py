@@ -64,7 +64,31 @@ def render_pdf (htmlfn, cssfn, pdffn) :
 
     surface.show_page()
 
+def render_multipage_pdf (htmlfns, cssfns, pdffn) :
+    """for PDF files it might be helpful to show how to pack multiple
+    pages into the same PDF. Robinson users might find this useful"""
+
+    # For PDF files, width and height are in "point" units (1/72 of an inch)
+    WIDTH, HEIGHT = 14*72, 8.5*72
+
+    surface = cairo.PDFSurface (pdffn, WIDTH, HEIGHT)
+    ctx = cairo.Context (surface)
+
+    for htmlfn, cssfn in zip(htmlfns, cssfns):
+        with open(htmlfn) as f:
+            html = f.read()
+        with open(cssfn) as f:
+            css = f.read()
+
+        rob = robinson.html (html, css, WIDTH, load_resourcefn, text_extents, font_extents, ctx)
+
+        rob.render(ctx)
+
+        surface.show_page()
+
+
 render_pdf ('test/splash.html', 'test/splash.css', 'splash.pdf')
 render_pdf ('test/weather.html', 'test/weather.css', 'weather.pdf')
-
-
+render_multipage_pdf(['test/splash.html', 'test/weather.html'], 
+                     ['test/splash.css', 'test/weather.css'], 
+                    'combined.pdf')
